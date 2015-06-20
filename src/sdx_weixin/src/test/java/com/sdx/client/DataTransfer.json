@@ -1,0 +1,13 @@
+{
+    "header":{
+        "clientType":1,
+        "compress":false,
+        "desc":"",
+        "encript":false,
+        "status":0,
+        "type":"DataTransfer",
+        "ver":"0.0.1"
+    },
+    "body":{
+    }
+}

@@ -1,0 +1,896 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+<meta content="telephone=no" name="format-detection" />
+<meta content="email=no" name="format-detection" />
+<title>在线打分</title>
+<script src="js/template.js"></script>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/pdfjs-1.0.712-dist/build/pdf.js"></script>
+<script type="text/javascript">
+    PDFJS.workerSrc = "js/pdfjs-1.0.712-dist/build/pdf.worker.js"
+</script>
+<script type="text/javascript" src="js/pdfjs-1.0.712-dist/web/compatibility.js"></script>
+<script type="text/javascript" src="js/pdfPreview.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="css/onlinescore.css" />
+<link rel="stylesheet" type="text/css" href="css/shade.css">
+<script>
+$(document).ready(function(){
+    if(localStorage.getItem("isFirstLog") == "true"){//是否首次登录
+        showHelp();
+    }
+    function showHelp(){
+        $('#guide').show();
+        var nowStep = 1;
+        $('#step_1').css('display','block').siblings().hide();
+        $('#guide').on('click',function(){
+            if(nowStep < 5){
+                var showStep = "#step_" + (nowStep + 1);
+                $(showStep).css('display','block').siblings().hide();
+                nowStep++;
+            }
+            else{
+                $('#guide').hide();
+                nowStep = 1;
+            }
+        })
+    }
+    //$.ajax({
+    /*url:url,
+     type:'get',
+     //data:sendData,
+     dataType:"jsonp",
+     jsonp: "callback",*/
+
+    // success:function(data){
+    //localStorage.projectdata = data;
+    // data = JSON.parse(data);
+    //console.info(data);
+    var data = JSON.parse(localStorage.projectdata);
+    var html = template('projectcontent', data);
+    document.getElementById('project').innerHTML = html;
+    $(".account").on("click",changepage);
+    function changepage(){
+        window.location.href="index.html";
+    }
+    $(".help").on("click",showHelp);
+    $(".project-Item li").on("click",changeConfigType);
+    $(".project-Item li").first().trigger("click");
+    function changeConfigType(){
+        var data = JSON.parse(localStorage.projectdata);
+        console.info(data);
+        var index = $(this).data("index");
+        localStorage.configIndex=index;
+        // var data = JSON.parse(localStorage.projectdata);
+        $(".project-Item li").removeClass("current");
+        $(this).addClass("current");
+        $(".warm").removeClass("none");
+        $("#projectList").addClass("none");
+        var html = template('meetingcontent', data["listConfig"][index]);
+        document.getElementById('meeting').innerHTML = html;
+        $(".meeting-groups-name .meeting-group-name").on('click',function(){
+            var parent = $(this);
+            var next = parent.next();
+            var icon =parent.children("i");
+            var status = parent.data('status');
+            localStorage.groupId = parent.data('groupid');
+            if(status!="block"){
+                next.removeClass("none");
+                next.addClass("block");
+                parent.data("status","block");
+                icon.removeClass("open-icon");
+                icon.addClass("close-icon");
+            }
+            else{
+                next.removeClass("block");
+                next.addClass("none");
+                parent.data("status","none");
+                icon.removeClass("close-icon");
+                icon.addClass("open-icon");
+            }
+        })
+        $(".meeting-groups-name .meeting-name").on("click",openMeeting);
+        $(".meeting-group-Items").first().find(".meeting-groups-name").first().find(".meeting-group-name").first().trigger("click");
+        function openMeeting(){
+            $(".warm").addClass("none");
+            $("#projectList").removeClass("none");
+            var object = this;
+            var projectId = $(this).data("projectid");
+            $(this).siblings().removeClass("currentColor");
+            $(this).addClass("currentColor");
+            window.localStorage.projectId = projectId;
+            var ExpertID = $(".jury").data("expertid");
+            console.info(ExpertID+","+projectId);
+            $.ajax({
+               url:"http://portal.appst.cnpc.com.cn:2048/PfxtInterface/PfxtServlet?action=OnLine_GetScoreData&json={'ExpertID':"+"'"+ExpertID+"'"+",'RelationID':"+"'"+projectId+"'"+"}",
+                //url:"projectdata.html",
+                type:'get',
+                // data:{'ExpertID':"2EE253ED-5CBE-42F3-9034-37E9AA1D2B13","RelationID": "选中的项目RelationID"},
+                dataType:'jsonp',
+                jsonp: "callback",
+                timeout:20000,
+                success:function (data){
+                    console.info(data);
+                    localStorage.scoredata = JSON.stringify(data);
+                    data = JSON.parse(localStorage.scoredata);
+                    var html = template('projectMes', data);
+                    document.getElementById('projectList').innerHTML = html;
+                    console.info(object);
+                    console.info(object.children[1]);
+                    console.info($(object.children[1]).html());
+                    //var string =object.innerText.replace(/^\[.*]/,"");
+                    var string = $(object.children[1]).html();
+                    $(".projectMesHeader").html(string);
+                    function hasSuggestion(){
+                        var hasSuggest=$(".table-body").find(".suggestion");
+                        var len = hasSuggest.length;
+                        for(var i=0;i<len;i++){
+                            var hasSuggestValue=hasSuggest[i].innerText;
+                            var lenI=hasSuggestValue.length;
+                            var heightValue =$(hasSuggest[i]).parent().height();
+                            hasSuggest[i].style.maxHeight= heightValue+'px';
+                            $(hasSuggest[i]).css({"display":"inline-block","overflow-y":"auto"});
+                            if(lenI>0){
+                                $(hasSuggest[i]).siblings().remove();
+                            }
+                        }
+                    }
+                    hasSuggestion();
+                    function keepOnePoint(){
+                        var valuePoints = $(".table-body").find(".maxScore");
+                        var len = valuePoints.length;
+                        for(var i=0;i<len;i++){
+                            var valuePointsValue=valuePoints[i].innerText;
+                            valuePointsValue=Number(valuePointsValue).toFixed(1);
+                            valuePoints[i].innerText=valuePointsValue;
+                        }
+                        var scorePoints = $(".table-body").find(".scoreInputValue");
+                        var len2 = scorePoints.length;
+                        for(var i=0;i<len2;i++){
+                            var scorePointsValue=scorePoints[i].value;
+                            scorePointsValue=Number(scorePointsValue).toFixed(1);
+                            scorePoints[i].value=scorePointsValue;
+                        }
+                    }
+                    keepOnePoint();
+                    $(".projectMesNav-items li").on('click',function(){
+                        var href = $(this).data("href");
+                        var projectMesNavItems=$(".projectMesNav-items li");
+                        projectMesNavItems.removeClass("current");
+                        projectMesNavItems.css("color"," #2a89d3");
+                        $(this).addClass("current");
+                        $(this).css("color","white");
+                        var children = $(".projectMesContent").children();
+                        children.removeClass("block");
+                        children.addClass("none");
+                        var child = $("div[name= '"+href+"']");
+                        child.addClass("block");
+                        function basicMes(){
+                            var projectBasicMesValueArr=$(".projectBasicMesContainer").find(".projectBasicMesValue");
+                            var basicLen = projectBasicMesValueArr.length;
+                            for(var i=0;i<basicLen;i++){
+                                var heightValue =$(projectBasicMesValueArr[i]).parent().parent().height();
+                                projectBasicMesValueArr[i].style.height= heightValue+'px';
+                                $(projectBasicMesValueArr[i]).css("line-height",heightValue+'px');
+                            }
+                        }
+                        basicMes();
+                    })
+                    var maxScore = $(".maxScore");
+                    var count = 0;
+                    var len = maxScore.length;
+                    for(var i = 0;i<len;i++){
+                        count +=Number(maxScore[i].innerText);
+                    }
+                    $(".count").html(count.toFixed(1));
+                    $("tbody .scoreInput").on('click',showDialog)
+                    $("tbody .write-suggest").on('click',showDialog)
+                    function showDialog(){
+                        var dialogCover = $("#dialog-cover");
+                        dialogCover.removeClass("none");
+                        dialogCover.addClass("block");
+                        var mesSave = $(this).parent();
+                        $("tbody .table-body").removeClass("current");
+                        mesSave.addClass("current");
+                        var maxValue = mesSave.find(".maxScore").html();
+                        var object = mesSave.find(".scoreInputValue").val();
+                        var suggest=mesSave.find(".write-suggest span").length;
+                        if(suggest>0){
+                            var suggestionHtml = mesSave.find(".write-suggest span").html();
+                            var data={"score":object,"suggestion":suggestionHtml,"hassuggestion":true,"maxScore":maxValue};
+                        }
+                        else{
+                            var data={"score":object,"hassuggestion":false,"maxScore":maxValue};
+                        }
+                        var html = template('setScoreDialog', data);
+                        document.getElementById('projectMesListDialog').innerHTML = html;
+                        var TextareaNode = $(".projectMesListDialog").find("textarea").length;
+                        $(".projectMesListDialog .confirm-btn").on('click',function(){
+                            var value1 = $(".projectMesListDialog").find("input").val();
+                            // var regu =" /^\d+(\.\d+)?$/";
+                            //var re = new RegExp(regu);
+                            if(Number(value1)> Number(maxValue)){
+                                $("#over-score").siblings().removeClass("block");
+                                $("#over-score").siblings().addClass("none");
+                                $("#over-score").addClass("block");
+                                $(".projectMesListDialog").find("input").focus();
+                            }
+                            //else if (value1.search(re) == - 1) {
+                            else if (isNaN(parseFloat(value1))) {
+                                $("#isNumber").siblings().removeClass("block");
+                                $("#isNumber").siblings().addClass("none");
+                                $("#isNumber").addClass("block");
+                                $(".projectMesListDialog").find("input").focus();
+                            }
+                            else if(Number(value1)<0){
+                                $("#isPositive").siblings().removeClass("block");
+                                $("#isPositive").siblings().addClass("none");
+                                $("#isPositive").addClass("block");
+                                $(".projectMesListDialog").find("input").focus();
+                            }
+                            /*else if(Number(value1)==0){
+                             $("#over-score").removeClass("block");
+                             $("#over-score").addClass("none");
+                             $("#isNumber").removeClass("block");
+                             $("#isNumber").addClass("none");
+                             $("#zeroDialog").removeClass("none");
+                             $("#zeroDialog").addClass("block");
+                             value1=Number(value1).toFixed(1);
+                             $(".projectMesListDialog").find("input").focus();
+                             $("#zeroDialog .confirm-yes").on('click',function(){
+                             var value2 = $(".projectMesListDialog").find("textarea").val();
+                             mesSave.find(".scoreInputValue").val(value1);
+                             if(value2){
+                             mesSave.find(".write-suggest i").remove();
+                             mesSave.find(".write-suggest span").html(value2);
+                             }
+                             $(".projectMesListDialog").remove();
+                             dialogCover.removeClass("block");
+                             dialogCover.addClass("none");
+                             $("#zeroDialog").addClass("none");
+                             $("#zeroDialog").removeClass("block");
+                             gotCount();
+                             })
+                             $("#zeroDialog .confirm-no").on('click',function(){
+                             $("#zeroDialog").addClass("none");
+                             $("#zeroDialog").removeClass("block");
+                             })
+                             }*/
+                            else{
+                                $(".projectMesListDialog").find("input").focus();
+                                value1=Number(value1).toFixed(1);
+                                var value2 = $(".projectMesListDialog").find("textarea").val();
+                                mesSave.find(".scoreInputValue").val(value1);
+                                if(value2){
+                                    mesSave.find(".write-suggest i").remove();
+                                    mesSave.find(".write-suggest span").html(value2);
+                                }
+                                gotCount();
+                                $(".projectMesListDialog").remove();
+                                dialogCover.removeClass("block");
+                                dialogCover.addClass("none");
+                            }
+                        })
+                        $(".projectMesListDialog .cancel-btn").on('click',function(){
+                            $(".projectMesListDialog").remove();
+                            dialogCover.removeClass("block");
+                            dialogCover.addClass("none");
+
+                        })
+                    }
+                    function gotCount(){
+                        var gotScore = $(".scoreInput input[type='text']");
+                        var count = 0;
+                        var len = gotScore.length;
+                        for(var i = 0;i<len;i++){
+                            count +=Number(gotScore[i].value);
+                        }
+                        $(".gotCount").html(count.toFixed(1));
+                    }
+                    gotCount();
+                    $(".projectMesTop .projectMesTop-left").on('click',function(){
+                        var parent= $(this);
+                        var changeIcon = parent.children();
+                        var status = parent.data('status');
+                        if(status!="block"){
+                            changeIcon.removeClass("left-icon");
+                            changeIcon.addClass("right-icon");
+                            $(".projectList").css("width","1024px");
+                            $(".projectList").css("margin-left","0");
+                            $(".project").addClass("none");
+                            $(".meeting").addClass("none");
+                            parent.data("status","block");
+                        }else{
+                            changeIcon.removeClass("right-icon");
+                            changeIcon.addClass("left-icon");
+                            $(".projectList").css("width","620px");
+                            $(".projectList").css("margin-left","404px");
+                            $(".project").removeClass("none");
+                            $(".meeting").removeClass("none");
+                            parent.data("status","none");
+                        }
+                    })
+                    //attPreview --by Fan Boyang
+					var newPDF;
+					var getTitle;
+                    $(".projectAttachBody").on('click',function(){                        
+                        var attUrl = decodeURIComponent($(this).find(".attName").data("atturl"));
+                        attUrl = attUrl.replace(/\\/g,"/");
+						attUrl = attUrl.replace("+"," ");
+						//alert(attUrl);
+                        newPDF = attPreLoad(attUrl);
+						//var prevDiv = document.cr
+						$('#attPreview').show();
+						var attType = $(this).find(".attName").text().split(".");
+						getTitle = $(this).find(".attName").text().split("."+attType[attType.length-1])[0];
+						$('.attTitle').html(getTitle);
+                        $('#closePreview').show();
+						$('#loading_pdf').show();
+						console.log(getTitle);
+                    })
+					
+					/*$('body').delegate('#next','click',function(){
+						console.log(getTitle);
+						newPDF.nextPage();
+					});
+					$('body').delegate('#prev','click',function(){
+						newPDF.prevPage();
+					});
+					$('body').delegate('#curPage','click',function(){//当前页码点击时左对齐，方便输入
+						$(this).css('text-align','left');
+					});
+					$('body').delegate('#curPage','blur',function(){//当前页码显示时恢复右对齐
+						$(this).css('text-align','right');
+					});
+					$('body').delegate('#jumpTo','click',function(){
+						newPDF.jumpPage();
+					});
+					$('body').delegate('#closePreview','click',function(){
+						$(this).hide();
+						$('#attPreview').hide();
+						console.log(getTitle);
+						newPDF.destroy();
+						console.log(newPDF);
+					});*/
+                    //end attPreview--by Fan Boyang
+                    $(".projectMesTop .save-btn").on('click',function(){
+                        var projectId = window.localStorage.projectId;
+                        var ExpertID = $(".jury").data("expertid");
+                        var suggest = $('.table-foot');
+                        var PassState = suggest.find('input:checked').data("itemid");
+                        var itemList = [];
+                        var zeroList = [];
+                        $('.table-body').each(function(){
+                            var ele = $(this);
+                            var hasScore = ele.find('.scoreInputValue').val();
+                            var ifHasSuggestion = ele.find('.write-suggest span');
+                            var hasSuggest = suggest.find('textarea');
+                            if(Number(hasScore)==0){
+                                var zeroName=ele.find(".score-item-name").html();
+                                zeroList.push(zeroName);
+                            }
+                            if(ifHasSuggestion.length>0){
+                                if(hasScore){
+                                    var item = {
+                                        'ExpertID':ExpertID,
+                                        'IndexID':ele.data('id'),
+                                        'RelationID':projectId,
+                                        'Score':hasScore,
+                                        'Suggestion':ifHasSuggestion.html(),
+                                        'PassState':PassState,
+                                        'IndexType':ele.data('indextype')
+                                    };
+                                }else{
+                                    var item = {
+                                        'ExpertID':ExpertID,
+                                        'IndexID':ele.data('id'),
+                                        'RelationID':projectId,
+                                        'Suggestion':ifHasSuggestion.html(),
+                                        'PassState':PassState,
+                                        'IndexType':ele.data('indextype')
+                                    };
+                                }
+                            }
+                            else if(hasSuggest.length>0){
+                                if(hasScore){
+                                    var item = {
+                                        'ExpertID':ExpertID,
+                                        'IndexID':ele.data('id'),
+                                        'RelationID':projectId,
+                                        'Score':hasScore,
+                                        'Suggestion':hasSuggest.val(),
+                                        'PassState':PassState,
+                                        'IndexType':ele.data('indextype')
+                                    };
+                                }else{
+                                    var item = {
+                                        'ExpertID':ExpertID,
+                                        'IndexID':ele.data('id'),
+                                        'RelationID':projectId,
+                                        'Suggestion':hasSuggest.val(),
+                                        'PassState':PassState,
+                                        'IndexType':ele.data('indextype')
+                                    };
+                                }
+                            }else{
+                                if(hasScore){
+                                    var item = {
+                                        'ExpertID':ExpertID,
+                                        'IndexID':ele.data('id'),
+                                        'RelationID':projectId,
+                                        'Score':hasScore,
+                                        'PassState':PassState,
+                                        'IndexType':ele.data('indextype')
+                                    };
+                                }else{
+                                    var item = {
+                                        'ExpertID':ExpertID,
+                                        'IndexID':ele.data('id'),
+                                        'RelationID':projectId,
+                                        'PassState':PassState,
+                                        'IndexType':ele.data('indextype')
+                                    };
+                                }
+                            }
+                            itemList.push(item);
+                        });
+                        var isSaved = $(".projectMesList").data("issaved");
+                        var hasSuggest = suggest.find('textarea');
+                        console.info(isSaved);
+                        if(isSaved=="true"||isSaved==true){
+                            var OperateMode = 'Edit';
+                        }else{
+                            var OperateMode = 'Add';
+                        }
+                        if(hasSuggest.length>0){
+                            var params = {
+                                'OperateMode':OperateMode,
+                                'ListScore':itemList,
+                                'EnableIndexConclusion': false
+                            };
+                        }else{
+                            var params = {
+                                'OperateMode':OperateMode,
+                                'EnableIndexConclusion': true,
+                                'ListScore':itemList
+                            };
+                        }
+                        console.info(params);
+                        var params=JSON.stringify(params);
+                        console.info(params);
+                        if(zeroList.length>0){
+                            var zeroLen = zeroList.length;
+                            var strName="";
+                            for(var i =0;i<zeroLen;i++){
+                                strName=strName+zeroList[i]+',';
+                            }
+                            $("#zeroDialog").find(".zeroDialog-content-name").html(strName);
+                            var dialogCover = $("#dialog-cover");
+                            dialogCover.removeClass("none");
+                            dialogCover.addClass("block");
+                            $("#zeroDialog").removeClass("none");
+                            $("#zeroDialog").addClass("block");
+                            $("#zeroDialog .cancel-btn").on('click',function(){
+                                dialogCover.removeClass("block");
+                                dialogCover.addClass("none");
+                                $("#zeroDialog").addClass("none");
+                                $("#zeroDialog").removeClass("block");
+                            })
+                            clickOnce = 1;
+                            $("#zeroDialog .confirm-btn").on('click',function(){
+                                if(clickOnce == 1){
+                                    clickOnce++;
+                                    $("#zeroDialog").addClass("none");
+                                    $("#zeroDialog").removeClass("block");
+                                    $.ajax({
+                                        url:"http://portal.appst.cnpc.com.cn:2048/PfxtInterface/PfxtServlet?action=OnLine_SaveScoreData&json="+params,
+                                        //url:"project.html",
+                                        type:'get',
+                                        //data:params,
+                                        dataType: "jsonp",
+                                        jsonp: "callback",
+                                        timeout:20000,
+                                        //dataType:"json",
+                                        success:function (data){
+                                            var html = template('saveMessage', data);
+                                            document.getElementById('saveMessageDialog').innerHTML = html;
+                                            var dialogCover = $("#dialog-cover");
+                                            dialogCover.removeClass("none");
+                                            dialogCover.addClass("block");
+                                            $('.saveMessageDialog').on('click',function(){
+                                                $(".saveMessageDialog").remove();
+                                                dialogCover.removeClass("block");
+                                                dialogCover.addClass("none");
+                                            })
+                                        },
+                                        complete:function(XMLHttpRequest,status){
+                                            if(status=='timeout'){
+                                                alert("服务器没有回应，请检查您的网络或者联系服务员。");
+                                            }
+                                        }
+                                    })
+                                    var saveScored= $("tbody").find(".gotCount").html();
+                                    $(".meeting-name[data-projectid='"+projectId+"']").find(".project-score").html("["+saveScored+"]");
+                                    var data = JSON.parse(localStorage.projectdata)
+                                    var listMeeting = data['listConfig'][localStorage.configIndex]['listMeeting'];
+                                    for(var i = 0;i < listMeeting.length;i++){
+                                        var listGroup = listMeeting[i]['listGroup'];
+                                        for(var j = 0;j < listGroup.length;j++){
+                                            if(listGroup[j]['GroupID'] == localStorage.groupId){
+                                                var listProject = listGroup[j]['listProject'];
+                                                for(var k = 0;k < listProject.length;k++){
+                                                    if(listProject[k]['ID'] == localStorage.projectId){
+                                                        listProject[k]['DataContext'] = saveScored;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    localStorage.projectdata = JSON.stringify(data);
+                                    var scoreData = JSON.parse(localStorage.scoredata);
+                                    scoreData['isSaved']="true";
+                                    console.info(scoreData);
+                                    localStorage.scoredata = JSON.stringify(scoreData);
+                                    $(".projectMesList").data("issaved","true");
+                                }
+                            })
+                        }else{
+                            $.ajax({
+                                //url:"http://11.8.8.86:8080/PfxtInterface/PfxtServlet?action=OnLine_SaveScoreData&json="+params,
+                                url:"http://portal.appst.cnpc.com.cn:2048/PfxtInterface/PfxtServlet?action=OnLine_SaveScoreData&json="+params,
+
+
+                                //url:"project.html",
+                                type:'get',
+                                //data:params,
+                                dataType: "jsonp",
+                                jsonp: "callback",
+                                //dataType:"json",
+                                timeout:20000,
+                                success:function (data){
+                                    console.info(data);
+                                    var html = template('saveMessage', data);
+                                    document.getElementById('saveMessageDialog').innerHTML = html;
+                                    var dialogCover = $("#dialog-cover");
+                                    dialogCover.removeClass("none");
+                                    dialogCover.addClass("block");
+                                    $('.saveMessageDialog').on('click',function(){
+                                        $(".saveMessageDialog").remove();
+                                        dialogCover.removeClass("block");
+                                        dialogCover.addClass("none");
+                                    })
+                                },
+                                complete:function(XMLHttpRequest,status){
+                                    if(status=='timeout'){
+                                        alert("服务器没有回应，请检查您的网络或者联系服务员。");
+                                    }
+                                }
+                            })
+                            var saveScored= $("tbody").find(".gotCount").html();
+                            if(saveScored){
+                                $(".meeting-name[data-projectid='"+projectId+"']").find(".project-score").html("["+saveScored+"]");
+                                var data = JSON.parse(localStorage.projectdata)
+                                var listMeeting = data['listConfig'][localStorage.configIndex]['listMeeting'];
+                                for(var i = 0;i < listMeeting.length;i++){
+                                    var listGroup = listMeeting[i]['listGroup'];
+                                    for(var j = 0;j < listGroup.length;j++){
+                                        if(listGroup[j]['GroupID'] == localStorage.groupId){
+                                            var listProject = listGroup[j]['listProject'];
+                                            for(var k = 0;k < listProject.length;k++){
+                                                if(listProject[k]['ID'] == localStorage.projectId){
+                                                    listProject[k]['DataContext'] = saveScored;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                localStorage.projectdata = JSON.stringify(data);
+                                var scoreData = JSON.parse(localStorage.scoredata);
+                                scoreData['isSaved']="true";
+                                console.info(scoreData);
+                                localStorage.scoredata = JSON.stringify(scoreData);
+                                $(".projectMesList").data("issaved","true");
+                            }
+                        }
+                    })
+                },
+                complete:function(XMLHttpRequest,status){
+                    if(status=='timeout'){
+                        alert("服务器没有回应，请检查您的网络或者联系服务员。");
+                    }
+                }
+            })
+        }
+    }
+    //}
+    // });
+});
+</script>
+</head>
+<body>
+<div id="guide" class="guide" style="display:none">
+
+    <img src="img/main_jpg.jpg" height="768" width="1024">
+    <div id="index_step">
+        <div id="step_1" style="display:none">
+            <div class="shade shade_1"></div>
+            <div class="highlight hl_1"></div>
+            <div class="arrow_left left_1"></div>
+            <div class="tip tip_1">
+                <p class="tip_big">选择您想评审的项目类型</p>
+                <p class="tip_small">（假如您选择了科研项目评审）</p>
+            </div>
+        </div>
+        <div id="step_2" style="display:none">
+            <div class="shade shade_2_1"></div>
+            <div class="shade shade_2_2"></div>
+            <div class="highlight hl_2"></div>
+            <div class="arrow_left left_2"></div>
+            <div class="tip tip_2">
+                <p class="tip_big">选择科研项目下具体分组的项目</p>
+                <p class="tip_small">（假如您选择了第一小组的第一个项目）</p>
+            </div>
+        </div>
+        <div id="step_3" style="display:none">
+            <div class="shade shade_3_1"></div>
+            <div class="shade shade_3_2"></div>
+            <div class="highlight hl_3"></div>
+            <div class="arrow_right right_1"></div>
+            <div class="tip tip_3">
+                <p class="tip_big">在此您可以为此项目打分<br>打分前可查看项目的基本信息和附件<br>以便了解项目</p>
+            </div>
+        </div>
+        <div id="step_4" style="display:none">
+            <div class="shade shade_4_1"></div>
+            <div class="shade shade_4_2"></div>
+            <div class="highlight hl_4"></div>
+            <div class="arrow_down down_1"></div>
+            <div class="tip tip_4">
+                <p class="tip_big">了解了项目的情况后<br>可以在下面的输入框内按照规则打分了</p>
+            </div>
+        </div>
+        <div id="step_5" style="display:none">
+            <div class="shade shade_5"></div>
+            <div class="shade shade_1"></div>
+            <div class="highlight hl_5_1"></div>
+            <div class="arrow_left left_3"></div>
+            <div class="arrow_left left_4"></div>
+            <div class="tip tip_5_1">
+                <p class="tip_big">再看一遍？点击帮助<br><br>想退出？点此注销</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div id="project" class="project"></div>
+    <div id="meeting" class="meeting"></div>
+    <div class="warm">
+        <h3>温馨提示</h3>
+        <ul>
+            <li>1、会议未结束前，您可以修改本人已打项目分数，再次保存即可；</li>
+            <li>2、若针对某项目您是规避专家，则不能对规避项目打分，只可查看基本信息、附件；</li>
+            <li>3、在保存您的分数时，注意复核一下您是否有0分指标或分数为0的情况；</li>
+            <li>4、若您对打分操作有疑问，可重新引导界面左下角”帮助“。</li>
+        </ul>
+    </div>
+    <div id="projectList" class="projectList"></div>
+    <div id="dialog-cover" class="dialog-cover none">
+        <div id="projectMesListDialog"></div>
+        <!-- <div id="zeroDialog" class="zeroDialog none">
+             <div class="zeroDialog-content">您确定要给0分吗</div>
+             <div><span class="confirm-no confirm">取消</span><span class="confirm-yes confirm">确定</span></div>
+         </div>-->
+        <div id="zeroDialog" class="zeroDialog none">
+            <div class="projectMesListDialog-header"><span class="cancel-btn">取消</span><span>提示</span><span class="confirm-btn">确定</span></div>
+            <div class="zeroDialog-content"><span class="zeroDialog-content-name"></span>确定要给0分吗</div>
+        </div>
+        <div id="saveMessageDialog"></div>
+    </div>
+</div>
+<script id="projectcontent" type="text/template">
+    <div class="jury" data-expertid="{{ExpertID}}">
+        <div class="juryphoto"><img src="img/photo.png"></div>
+        <div class="juryname">{{ExpertName}}</div>
+    </div>
+    <div class="project-Items">
+        <ul class="project-Item">
+            {{each listConfig as value i}}
+            {{if value['ConfigID']=="1"}}
+            <li data-index="{{i}}"><i class="research-icon"></i></br><span class="project-Item-name">{{value['ConfigType']}}</span></li>
+            {{else if value['ConfigID']=="2"}}
+            <li data-index="{{i}}"><i class="reward-icon"></i></br><span class="project-Item-name">{{value['ConfigType']}}</span></li>
+            {{else if value['ConfigID']=="14"}}
+            <li data-index="{{i}}"><i class="ip-icon"></i></br><span class="project-Item-name">{{value['ConfigType']}}</span></li>
+            {{else if value['ConfigID']=="15"}}
+            <li data-index="{{i}}"><i class="after-icon"></i></br><span class="project-Item-name">{{value['ConfigType']}}</span></li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+    <div>
+        <div  class="project-Icons">
+            <i class="help"></i>
+            </br>
+            <i class="account"></i>
+        </div>
+    </div>
+</script>
+<script id="meetingcontent" type="text/template">
+    <h3 class="project-header">{{ConfigType}}</h3>
+    <div class="meeting-group-container">
+        {{each listMeeting as meeting i}}
+        <div class="meeting-group-Items">
+            <h5 class="meeting-group-Item">{{meeting['MeetingName']}}</h5>
+            <div id="meeting-groups-name" class="meeting-groups-name">
+                {{each meeting['listGroup'] as group j}}
+                <div>
+                    <div  data-groupindex="{{j}}" data-groupid="{{group['GroupID']}}" class="meeting-group-name">{{group['GroupName']}}<i class="open-icon"></i></div>
+                    {{ if group['listProject'] }}
+                    <div class="meeting-group-name-item none">
+                        {{each group['listProject'] as project projectIndex}}
+                        <div data-projectid="{{project['ID']}}" class="meeting-name"><span class="project-score">[{{project['DataContext']}}]</span><span class="meeting-nameValue">{{project
+['NAME']}}</span></div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>
+<script id="projectMes" type="text/template">
+    <div class="projectMesTop"><span class="projectMesTop-left"><i class="left-icon"></i></span><span class="save-btn">保存</span></div>
+    <div class="projectMesHeader"></div>
+    <div class="projectMesNav">
+        <ul class="projectMesNav-items">
+            <li class="current" style="color: white;" data-href="projectMesListContainer">打分</li>
+            <li data-href="projectBasicMes">基本信息</li>
+            <li data-href="projectAttach">附件</li>
+			
+        </ul>
+		
+    </div>
+    <div class="projectMesContent">
+        <div class="projectMesListContainer" name="projectMesListContainer">
+            {{if MeegingOver}}
+            <div>此项目评审已经结束,无法打分</div>
+            {{else if NoneExpert}}
+            <div class="noneExpert">您是规避专家，无法打分。</div>
+            {{else}}
+            <div class="projectMesList" data-issaved="{{isSaved}}">
+                <table class="projectMesListTable" cellspacing="0" cellpadding="0" data-enableindexconclusion="{{score['Condition']['EnableIndexConclusion']}}">
+                    <tr class="table-header">
+                        <th>指标名称</th>
+                        <th>指标描述</th>
+                        <th>分值上限</th>
+                        <th>等级</th>
+                        <th>得分</th>
+                        {{if score['Condition']["EnableIndexConclusion"]}}
+                        <th>意见</th>
+                        {{/if}}
+                    </tr>
+
+                    {{each score['Indexs'] as IndexValue parentIndex}}
+                    <tr class="table-body" data-id = "{{IndexValue['IndexID']}}" data-indextype="{{IndexValue['IndexType']}}">
+                        <td class="score-item-name">{{ IndexValue['IndexName']}}</td>
+                        <td>{{ IndexValue['IndexDescription']}}</td>
+                        <td class="maxScore">{{ IndexValue['IndexWeight']}}</td>
+                        <td>
+                            <ul class="scoreItemList">
+                                {{each IndexValue['IndexItem'] as scoreItemValue scoreItemIndex}}
+                                <li><span class="scoreItemListContent">{{scoreItemValue['ItemName']}}</span><span class="scoreItemListScore">{{scoreItemValue['ScoreRange']}}</span></li>
+                                {{/each}}
+                            </ul>
+                        </td>
+                        <td class="scoreInput"><input class="scoreInputValue" onfocus=" this.style.imeMode='disabled'" name="score" type="text" value="{{IndexValue['Score']}}" /></td>
+                        {{if score['Condition']["EnableIndexConclusion"]}}
+                        <td class="write-suggest"><i class="write-icon"></i><span class="suggestion" name="suggestion">{{IndexValue['Suggestion']}}</span></td>
+                        {{/if}}
+                    </tr>
+                    {{/each}}
+                    <tr>
+                        <td class="sumCount">总分</td>
+                        <td></td>
+                        <td class="count"></td>
+                        <td></td>
+                        <td class="gotCount"></td>
+                        {{if score['Condition']["EnableIndexConclusion"]}}
+                        <td></td>
+                        {{/if}}
+                    </tr>
+                </table>
+                <div class="table-foot">
+                    <div class="table-foot-header">专家意见</div>
+                    {{if score['Condition']["EnableNatured"]}}
+                    {{each score['Natured'] as NaturedItemValue NaturedItemIndex}}
+                    <div class="radioValueContainer"><input data-itemid="{{NaturedItemValue['ItemID']}}" type="radio" name="suggestionResult" value="{{NaturedItemValue['ItemName']}}"
+                        {{NaturedItemValue['Checked']}} /><span class="radioValue">{{NaturedItemValue['ItemName']}}</span></div>
+                    {{/each}}
+                    {{/if}}
+                    {{if score['Condition']["EnableConclusion"]}}
+                    <textarea name="suggestionTextarea">{{score["Suggest"]}}</textarea>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        <div class="projectBasicMes none" name="projectBasicMes">
+            {{each score['ProjectInfo'] as ProjectInfoValue ProjectInfoIndex}}
+            <div class="projectBasicMesContainer">
+                <div><label class="projectBasicMesName">{{ProjectInfoValue['name']}}</label><span class="projectBasicMesValue">{{ProjectInfoValue['value']}}</span></div>
+            </div>
+            {{/each}}
+        </div>
+        <div  name="projectAttach" class="projectAttachBox none">
+            <table class="projectAttach" cellspacing="0" cellpadding="0">
+                <tr class="projectAttachHeader">
+                    <th>文件顺序</th>
+                    <th>文件名称</th>
+                    <th>文件类型</th>
+                    <th>上传人员</th>
+                </tr>
+                {{each score['ProjectAtt'] as projectAttValue projectAttIndex}}
+                <tr class="projectAttachBody">
+                    <td>{{projectAttValue["FileOrder"]}}</td>
+                    <td class="attName" data-atturl="{{projectAttValue['FilePath']}}">{{projectAttValue["FileName"]}}</td>
+                    <td>{{projectAttValue["TypeName"]}}</td>
+                    <td>{{projectAttValue["Uploader"]}}</td>
+                </tr>
+                {{/each}}
+            </table>
+            <div id="attPreview" style="display:none">
+                <div class="title fixed">
+					<img id="loading_pdf" src="img/loading.gif" width="40" height="40" alt="loading">
+                    <button id="prev"></button>
+                    <button id="next"></button>
+					<div class="jumpPage">
+						页数：
+						<input id="curPage" type="text">&nbsp;/&nbsp;
+						<span id="tolPage"></span>
+						<button id="jumpTo">跳转</button>
+					</div>
+					<div class="attTitle"></div>
+                </div>
+                <div class="pdfView">
+                </div>
+            </div>
+            <a id="closePreview" style="display:none" href="javascript:void(0)">×</a>
+        </div>
+    </div>
+</script>
+<script  id="setScoreDialog" type="text/template">
+    <div class="projectMesListDialog">
+        <div class="projectMesListDialog-header"><span class="cancel-btn">取消</span><span>评分</span><span class="confirm-btn">确定</span></div>
+        <div class="projectMesListDialogScore projectMesListDialogItem">
+            <div><label>请输入分数</label><input autofocus="autofocus"  type="number" name="point" value="{{score}}"/><span class="score-range">0-{{maxScore}}</span></div>
+            <div>
+                <div id="over-score" class="over-score none">分数超过最大值，请重新输入。最大分值为<span>{{maxScore}}</span></div>
+                <div id="isNumber" class="over-score none">请输入正确格式的分值。</div>
+                <div id="isPositive" class="over-score none">分数不能为负，请重新输入。</div>
+            </div>
+        </div>
+        {{if hassuggestion}}
+        <div class="projectMesListDialogSuggestion projectMesListDialogItem">
+            <label>请输入意见</label>
+            <textarea placeholder="您还可以在此输入您的建议">{{suggestion}}</textarea>
+        </div>
+        {{/if}}
+        <!--<div class="dialog-btns">
+            <span class="confirm-btn">确定</span><span class="cancel-btn">取消</span>
+        </div>-->
+    </div>
+</script>
+<script  id="saveMessage" type="text/template">
+    <div class="saveMessageDialog">
+        <div class="saveMes">{{Message}}</div>
+        <div class="saveMes-btn">确定</div>
+    </div>
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="apple-mobile-web-app-status-bar-style" content=black” />
+<title>东方公司科技管理系统_登录</title>
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<!--<script type="text/javascript" src="JS/cordova.js"></script>-->
+</head>
+
+<body>
+	<div class="main">
+    	<div class="login_wrap">
+        	<h1 class="sys_title"><span class="cnpc_icon"></span>科研评审在线</h1>
+            <h2 class="sys_title_sm">东方公司科技管理系统</h2>
+            <form class="login_form">
+            	<input id="username" class="login_input uname" type="email">
+                <input id="password" class="login_input pwd" type="password">
+                <div class="add_wrap">
+                	<span class="radioFake">
+                    	<input id="rd_cnpc" class="rd_cnpc" type="radio" name="logType" value="cnpc">
+                    </span>
+                    <label for="rd_cnpc">cnpc</label>
+                    <span class="radioFake">
+                    	<input id="rd_system" class="rd_system"  type="radio" name="logType" value="system">
+                    </span>
+                    <label for="rd_system">system</label>
+                    <span class="checkboxFake">
+                    	<input id="remember" class="remeber" type="checkbox">
+                    </span>
+                    <label for="remember">记住账号密码</label>
+                </div>
+                <input class="login_btn" id="login" type="button" value="登录">
+            </form>
+        </div>
+        <div class="alter_wrap">
+            <div class="shade" style="display:none;"></div>
+            <div class="loading" style="display:none;">
+            	<img src="img/loading.gif" width="40" height="40" alt="loading">
+            </div>
+            <div class="infoNull" style="display:none;">
+                <p class="alertInfo">请填写用户名或密码</p>
+                <input class="closeDiv" type="button" value="确认">
+            </div>
+            <div class="infoWrong" style="display:none">
+                <p class="alertInfo">用户名、密码或登录模式有误</p>
+                <input class="closeDiv" type="button" value="确认">
+            </div>
+            <div class="dataNull" style="display:none">
+                <p class="alertInfo">当前没有您待打分的项目！</p>
+                <input class="closeDiv" type="button" value="确认">
+            </div>
+            <div class="infoFail" style="display:none">
+                <p class="alertInfo">无法连接到服务器，请查看网络</p>
+                <input class="closeDiv" type="button" value="确认">
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+		window.onload = function(){
+			inputStyle();
+			getInfo();
+		}
+		function inputStyle(){//样式控制
+			var checks = $('.add_wrap').find("input");
+			
+			for(var i=0; i<checks.length; i++){
+				//初始化隐藏原图标
+				checks[i].style.opacity = 0;
+				checks[i].style.filter = "alpha(opacity = 0)";
+				switchIt(checks[i]);
+				
+				//绑定点击事件
+				checks[i].onclick = function() {
+					if(this.getAttribute("type") == "radio"){ 
+						changeStyle(this,1);
+						setUncheck();
+					}
+					else{
+						switchIt(this);
+					}
+				}
+			}
+			function setUncheck(){//未选中radio的样式
+				for(var i=0; i<checks.length; i++){
+					if(checks[i].checked == false){
+						changeStyle(checks[i]);
+					}
+				}
+			}
+		}
+		
+		function changeStyle(obj,ischeck){//改变radio和checkbox样式
+			var parent = obj.parentNode;
+			if(ischeck){
+				if(obj.getAttribute("type") == 'radio'){
+					parent.style.backgroundPosition = "-26px -205px";
+					
+				}else{
+					parent.style.backgroundPosition = "-26px -292px";	
+				}
+				obj.checked = true;
+			}else{
+				if(obj.getAttribute("type") == 'radio'){
+					parent.style.backgroundPosition = "-26px -247px";
+				}else{
+					parent.style.backgroundPosition = "-26px -330px";
+				}
+				obj.checked = false;
+			}
+		}
+		function switchIt(obj){
+			if (obj.checked == true) { 
+				changeStyle(obj , 1);
+			} else { 
+				changeStyle(obj); 
+			} 	
+		}
+
+		//弹出框的关闭
+		$(".closeDiv").click(function(){
+			$(this).parent().hide();
+			$(".shade").hide();
+			$(".loading").hide();
+		})
+		//登录按钮点击
+		$('#login').click(function(){
+			//提交登录
+			var url = "http://portal.appst.cnpc.com.cn:2048/PfxtInterface/PfxtServlet?action=OnLine_IpadClientLogin&json=";
+			var username = $('.uname').val(), password = $('.pwd').val(), typeValue = $("input[name='logType']:checked").val();
+			if(username == '' || password == ''){
+				$(".shade").show();
+				$(".infoNull").show();
+			}
+			else{
+                var logType = (typeValue === "cnpc")?"cnpc.com.cn":typeValue;
+				var logData = "{'username':'"+username+"','password':'"+password+"','logType':'"+logType+"'}";
+				//alert(url+logData);
+				//login_ajax
+				$.ajax({
+					type:"GET",
+					url:(url+logData),
+					dataType:"jsonp",
+					jsop:"callback",
+					timeout:6000,	
+					beforeSend: function(){
+						$(".shade").show();
+						$(".loading").show();	
+					},			
+					success: function(data){//成功
+						console.info(data);
+						if(data.loginstatus === "true"){
+							if(data.havedata === "true"){
+								var isFirstLog = (data.userstatus === "first")?true:false;
+								var data=JSON.stringify(data);
+								localStorage.setItem("isFirstLog",isFirstLog);
+								localStorage.setItem("projectdata",data);
+								//console.info(localStorage.projectdata);
+								saveStorage(username,password,typeValue);
+								window.location.href="main.html";
+							}else{
+								$(".shade").show();
+								$(".dataNull").show();
+							}
+						}else{
+							$(".shade").show();
+							$(".infoWrong").show();
+						}
+					},
+					error: function(XMLHttpRequest,status){//失败
+						if(status == "timeout" || status == "error"){
+							$(".shade").show();
+							$(".infoFail").show();
+						}
+					}
+				})
+			}
+		})
+		function getInfo(){ //填充已保存的用户名和密码
+			if(localStorage.isStore == "yes"){
+				var rem = document.getElementById("remember");
+				changeStyle(rem,1);
+				var username = localStorage.getItem("uname");
+				var password = localStorage.getItem("pwd");
+				var logType = "rd_"+localStorage.getItem("logType");
+				if(username != null && password != null){
+					$('.uname').val(username);
+					$('.pwd').val(password);
+					var logT = document.getElementById(logType);
+					changeStyle(logT,1);
+				}
+			}else{
+                var logT = document.getElementById("rd_cnpc");
+                changeStyle(logT,1);
+            }
+		}		
+		function saveStorage(username,password,logType){ //记住用户名密码
+			var remInfo = document.getElementById('remember');
+			if(remInfo.checked){
+				localStorage.setItem("uname",username);
+				localStorage.setItem("pwd",password);
+				localStorage.setItem("logType",logType);
+				localStorage.setItem("isStore","yes");
+			}
+			else{
+				localStorage.removeItem("uname");
+				localStorage.removeItem("pwd");
+				localStorage.removeItem("logType");
+				localStorage.removeItem("isStore");
+			}
+		}
+    </script>
+</body>
+</html>

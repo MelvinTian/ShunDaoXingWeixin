@@ -1,0 +1,52 @@
+{
+    "header":{
+        "clientType":1,
+        "compress":false,
+        "desc":"",
+        "encript":false,
+        "status":0,
+        "type":"ServiceInfo",
+        "ver":"0.0.1"
+    },
+    "body":{
+        "platforms":[
+            {
+                "createTime":"2014-05-20 08:45:58",
+                "creatorId":1,
+                "platformCode":"RFOA",
+                "platformDesc":"瑞飞OA",
+                "platformId":1,
+                "platformName":"瑞飞OA",
+                "platformStatus":0,
+                "platformUrl":"",
+                "testUrl":"",
+                "updateTime":"",
+                "updaterId":0,
+                "services":[
+                    {
+                        "authTime":0,
+                        "authorId":0,
+                        "createTime":"2014-05-20 08:46:42",
+                        "creatorId":1,
+                        "enterPath":"RFOA/RF_TEST/index.html",
+                        "newSerVer":0,
+                        "newUpdateTime":"",
+                        "newUpdaterId":0,
+                        "newVerNum":0,
+                        "platformId":1,
+                        "resMode":1,
+                        "serviceCode":"RF_TEST",
+                        "serviceDesc":"测试用服务",
+                        "serviceId":1,
+                        "serviceName":"0",
+                        "serviceStatus":0,
+                        "serviceVersion":"0.0.1",
+                        "updateTime":"",
+                        "updaterId":0,
+                        "versionNumber":7
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,9 @@
+{
+    header:{
+        type:'CheckService',
+        ver:'0.0.1'
+    },
+    body:{
+        serviceCode:"RF_TEST"
+    }
+}

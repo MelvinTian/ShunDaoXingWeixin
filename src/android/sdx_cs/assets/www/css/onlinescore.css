@@ -1,0 +1,658 @@
+/**/
+@charset "utf-8";
+/* CSS Document */
+
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}ul,ol{list-style:none;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{display:block;margin:0;padding:0;}mark{background:#ff0;}.fixed{display:block;}.fixed:after{content:'.';height:0; visibility:hidden;display:block;clear:both;}
+input, textarea, button, a{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.guide{
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 1024px;
+    height:768px;
+}
+.main{
+    position:relative;
+    width: 1024px;
+    height: 768px;
+}
+.project{
+    position: relative;
+    float: left;
+    width:100px;
+    height:768px;
+    background-color:#344456;
+}
+.meeting{
+    position: relative;
+    float: left;
+    width: 304px;
+    height: 768px;
+}
+.meeting-group-container{
+    height: 728px;
+    overflow-y: auto;
+}
+.projectList{
+    position: relative;
+    margin-left: 404px;
+    width:620px;
+    height: 768px;
+}
+.warm{
+    position: relative;
+    width:620px;
+    height: 768px;
+    overflow:hidden;
+    float: left;
+}
+.warm h3{
+    margin-top: 5px;
+    text-align: center;
+    font-size: 24px;
+    color: #000;
+    height: 36px;
+    line-height: 36px;
+}
+.warm ul{
+    margin-top: 30px;
+    height: 500px;
+    overflow: hidden;
+}
+.warm li{
+    margin-left: 10px;
+    display: block;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+}
+.jury{
+    width: 100px;
+    height: 95px;
+    padding-top:25px;
+    text-align: center;
+}
+.juryname{
+    margin-top: 10px;
+    font-size: 10px;
+    line-height: 13px;
+    color: #cfd8e2;
+}
+.juryphoto{
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+}
+.juryphoto img{
+    width:48px;
+    height: 48px;
+}
+.project-Item{
+    padding: 0;
+    margin: 0;
+}
+.project-Item li{
+    padding-top:24px;
+    font-size: 0;
+    display: block;
+    height: 86px;
+    width: 100px;
+    text-align: center;
+}
+.project-Item-name{
+    display: inline-block;
+    font-size: 15px;
+    line-height: 16px;
+    color:#fff;
+    margin-top: 5px;
+    width: 60px;
+    white-space: normal;
+}
+.current{
+    background-color:#3192d8;
+}
+.meeting-group-name-item{
+    background-color: #f8f8f8;
+    border-right: 1px solid #e7e7e7;
+    overflow-x: hidden;
+}
+.meeting-group-name-item .currentColor{
+    color:#3192d8;
+    background-color: #fff;
+    border:1px solid #e7e7e7;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.project-Icons{
+    position: absolute;
+    bottom:40px;
+    width: 100px;
+    left: 0;
+    text-align: center;
+    font-size: 0;
+}
+.after-icon,.ip-icon,.reward-icon,.research-icon,.help,.account{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url("../img/icon.png") no-repeat;
+    background-size: 30px 180px;
+}
+.research-icon{
+    background-position: 0 0px;
+}
+.reward-icon{
+    background-position: 0 -30px;
+}
+.ip-icon{
+    background-position: 0 -60px;
+}
+.after-icon{
+    background-position: 0 -90px;
+}
+.help{
+    background-position: 0 -120px;
+}
+.account{
+    margin-top: 17px;
+    background-position: 0 -150px;
+}
+.project-header{
+    height: 40px;
+    line-height: 40px;
+    background-color: #2b8ad4;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-size: 15px;
+}
+.meeting-group-Item{
+    padding: 0;
+    margin: 0;
+    padding-left: 20px;
+    width: 284px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height:30px;
+    line-height:30px;
+    background-color: #5f90b7;
+    font-size: 15px;
+    color:white;
+}
+.meeting-groups-name{
+    overflow-x: hidden;
+}
+.meeting-group-name{
+    position: relative;
+    padding-left: 20px;
+    padding-right: 42px;
+    width: 242px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 50px;
+    line-height: 50px;
+    background-color: #e8e8e8;
+    font-size: 15px;
+    color:#000;
+    border-top: 1px solid #e1e1e1;
+}
+.meeting-name{
+    padding-left: 20px;
+    height: 40px;
+    width: 284px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 40px;
+    font-size: 12px;
+    color:#606060;
+}
+.meeting-nameValue{
+    text-decoration:underline;
+}
+.meeting-name .project-score{
+    margin-right: 5px;
+    color:#3192d8;
+}
+.open-icon,.close-icon,.left-icon,.right-icon,.write-icon{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../img/small-icon.png") no-repeat;
+    background-size: 25px 125px;
+}
+.open-icon,.close-icon,.right-icon{
+    position: absolute;
+    right: 20px;
+    top:12px;
+}
+.open-icon{
+    background-position: 0 -25px;
+}
+.close-icon{
+    background-position: 0 0px;
+}
+.left-icon{
+    margin-left: 17px;
+    margin-top: 7px;
+    background-position: 0 -75px;
+}
+.right-icon{
+    margin-left: 17px;
+    margin-top: -5px;
+    background-position: 0 -50px;
+}
+.write-icon{
+    background-position: 0 -100px;
+}
+.none{
+    display: none;
+}
+.block{
+    display: block;
+}
+.projectMesTop{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #3c4c5d;
+}
+.projectMesTop-left{
+    position: relative;
+    top:0;
+    left: 0;
+    display: inline-block;
+    width:60px;
+    height: 40px;
+}
+.save-btn{
+    width: 40px;
+    height: 40px;
+    float: right;
+    font-size: 15px;
+    margin-right: 20px;
+    color: #cfd8e2;
+    text-align: right;
+}
+.projectMesHeader{
+    width: 100%;
+    height: 66px;
+    line-height:66px;
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.projectMesNav{
+    width: 100%;
+    height: 27px;
+    margin-bottom: 13px;
+    text-align: center;
+}
+.projectMesListContainer{
+    position: relative;
+}
+.dialog-cover{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:#000;
+    background:rgba(0,0,0,0.3);
+	z-index:11;
+}
+.projectMesListDialog{
+    position: absolute;
+    top:120px;
+    left:330px;
+    width: 375px;
+    height: auto;
+    background-color: #fff;
+    z-index: 5;
+}
+.zeroDialog{
+    position: absolute;
+    text-align: left;
+    top:120px;
+    left:330px;
+    width: 375px;
+    min-height: 70px;
+    height: auto;
+    background-color: #fff;
+    z-index: 10;
+    font-size: 14px;
+}
+.zeroDialog .zeroDialog-content{
+    padding: 20px;
+    padding-top:0px;
+}
+.saveMessageDialog{
+    position: absolute;
+    text-align: center;
+    top:120px;
+    left: 330px;
+    width: 400px;
+    background-color: #fff;
+    z-index: 30;
+    height: 150px;
+}
+.saveMes{
+    font-size: 20px;
+    height: 100px;
+    line-height: 100px;
+}
+.saveMes-btn{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    color:white;
+    width: 80px;
+    background-color:#3192d8;
+    font-size: 14px;
+}
+.projectMesListDialog-header{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #2b8ad4;
+    text-align: center;
+    color: #fff;
+    font-size: 27px;
+    margin-bottom: 30px;
+}
+.projectMesListDialog-header .confirm-btn{
+    position: absolute;
+    width: 90px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    right: 0;
+   font-size: 18px;
+}
+.projectMesListDialog-header .cancel-btn{
+    position: absolute;
+    width: 90px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    left:0;
+    font-size: 18px;
+}
+.projectMesListDialogItem{
+    padding: 0 15px;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    color: #606060;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.projectMesListDialogItem label{
+    margin-right: 5px;
+}
+.projectMesListDialogScore .over-score{
+    color: #ff0000;
+    font-size: 15px;
+    margin-top: 4px;
+}
+.projectMesListDialogScore .score-range{
+    color: #ff0000;
+    font-size: 15px;
+    margin-left: 5px;
+}
+.projectMesListDialogSuggestion textarea{
+    margin-left: 80px;
+    margin-top: -20px;
+    width: 263px;
+    padding:10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    min-height: 80px;
+}
+.projectMesNav-items{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 48%;
+    height: 25px;
+    border: 1px solid #2a89d3;
+    font-size: 15px;
+    color: #2a89d3;
+    border-radius: 3px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+
+}
+.projectMesNav-items li{
+    display: inline-block;
+    float: left;
+    width: 33.3333%;
+    height: 25px;
+    line-height: 25px;
+    border-right: 1px solid #2a89d3 ;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+.projectMesNav-items li:nth-child(3){
+    border-right-width: 0px;
+}
+.projectMesContent{
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 7px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+.projectMesList{
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    height: 600px;
+    overflow:auto;
+}
+.projectMesListTable{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border: none;
+}
+.projectMesListTable tr,.projectMesListTable td,.projectMesListTable th{
+    border: 1px solid #eaeaea;
+}
+.projectMesListTable th{
+    height: 30px;
+    line-height: 30px;
+    background-color: #e8e8e8;
+    font-size: 12px;
+    color:#404040;
+}
+.projectMesListTable td{
+    font-size: 11px;
+    color: #404040;
+    padding: 10px;
+}
+.scoreItemList{
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+}
+.scoreItemListScore{
+    margin-left: 5px;
+    color: #fd6b3a;
+}
+.scoreInput input{
+    width: 90%;
+    color:#555;
+    border: 1px solid #dcdcdc;
+    padding-left: 5px;
+}
+.table-foot{
+    padding-left: 8px;
+}
+.table-foot-header{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #000;
+}
+.table-foot input{
+    margin: 0;
+    vertical-align: middle;
+}
+.table-foot .radioValue{
+    font-size: 12px;
+    margin-left: 5px;
+    color:#808080;
+}
+.table-foot textarea{
+    width: 100%;
+    height: 108px;
+    border: 2px solid #dcdcdc;
+    padding: 5px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    margin-bottom: 20px;
+    color: #555;
+}
+.radioValueContainer{
+    display: inline-block;
+    min-width: 42px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+.projectBasicMes{
+    width: 100%;
+    border: 2px solid #d2d2d2;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    max-height: 600px;
+    overflow: auto;
+}
+.projectBasicMesContainer{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    margin-top: -2px;
+    display: block;
+    width: 100%;
+    padding-right: 25px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+.projectBasicMesName{
+    display: inline-block;
+    font-size: 12px;
+    padding: 10px 15px 10px 25px;
+    width: 72px;
+    color: #828282;
+    background-color: #f8f8f8;
+    border-right: 1px solid #d2d2d2;
+    margin-right: 15px;
+}
+.projectBasicMesValue{
+    position: absolute;
+    top:0;
+    color:#626262;
+    font-size: 12px;
+   display: inline-block;
+}
+.noneExpert{
+    font-size: 24px;
+    margin-top: 30px;
+    margin-left: 15px;
+}
+.sumCount{
+    background-color: #e8e8e8;
+}
+.projectMesListTable .count,.projectMesListTable .gotCount{
+    color:#fd6b3a;
+}
+.table-header{
+    width: 100%;
+}
+.table-body td:nth-child(3){
+    color:#fd6b3a;
+}
+.table-header th:nth-child(1){
+    width: 12.5%;
+}
+.table-header th:nth-child(2){
+    width: 25%;
+}
+.table-header th:nth-child(3){
+    width: 12.5%;
+}
+.table-header th:nth-child(4){
+    width: 30%;
+}
+.table-header th:nth-child(5){
+    width: 10%;
+}
+.table-header th:nth-child(6){
+    width: 10%;
+}
+.projectAttachBox{
+    max-height: 600px;
+    overflow: auto;
+}
+.projectAttach{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border: none;
+}
+.projectAttach th{
+    height: 30px;
+    background-color: #e8e8e8;
+    font-size: 12px;
+    color: #404040;
+}
+.projectAttach td{
+    height: 40px;
+    font-size: 11px;
+    color: #404040;
+}
+.projectAttach tr,.projectAttach td,.projectAttach th{
+    border: 1px solid #eaeaea;
+
+}
+.projectAttach th:nth-child(1){
+    width: 10%;
+}
+.projectAttach th:nth-child(2){
+    width: 50%;
+}
+.projectAttach th:nth-child(3){
+    width: 30%;
+}
+.projectAttach th:nth-child(4){
+    width: 10%;
+}

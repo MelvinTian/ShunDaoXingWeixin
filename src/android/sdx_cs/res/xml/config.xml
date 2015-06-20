@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.cnpc.umapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="UmappPlugin" >
+        <param name="android-package" value="com.richfit.qixin.subapps.backlog.umapp.plugin.UmappPlugin"/>
+	</feature>
+    <name>Hello Cordova</name>
+
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+
+    <author href="http://cordova.io" email="dev@cordova.apache.org">
+        Apache Cordova Team
+    </author>
+
+    <!-- Allow access to arbitrary URLs in the Cordova WebView. This is a
+         development mode setting, and should be changed for production. -->
+    <access origin="http://*/*"/>
+    <access origin="https://*/*"/>
+
+    <!-- Grant certain URLs the ability to launch external applications. This
+         behaviour is set to match that of Cordova versions before 3.6.0, and
+         should be reviewed before launching an application in production. It
+         may be changed in the future. -->
+    <access origin="tel:*" launch-external="yes"/>
+    <access origin="geo:*" launch-external="yes"/>
+    <access origin="mailto:*" launch-external="yes"/>
+    <access origin="sms:*" launch-external="yes"/>
+    <access origin="market:*" launch-external="yes"/>
+
+    <!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
+    <!-- <content src="index.html" /> -->
+
+    <preference name="loglevel" value="DEBUG" />
+</widget>

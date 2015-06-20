@@ -1,0 +1,10 @@
+/* 全局样式 */
+body, ul, li, p, h1, h2, h3, h4, span, img, div { margin:0; padding:0; border:0; }
+ul { list-style-type:none; }
+div { font-size: 12px; }
+body { font-family: "微软雅黑","黑体",Arial, Helvetica, sans-serif; background-image:url(../images/body_bg.gif); overflow:scroll; background-repeat: repeat; }
+.fl { float: left; }
+.fr { float: right; }
+.f18 { font-size: 18px; }
+.h304 { height:304; }
+

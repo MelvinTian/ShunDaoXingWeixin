@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">在线评审</string>
+    <!-- 通用字符串 -->
+    <string name="network_is_unavailable">网络暂时不可用</string>
+    <string name="connection_failed">服务器连接失败</string>
+    <string name="login_failed">登录失败</string>
+    <string name="receive_new_message">发来%1$s条新消息</string>
+    
+    <string name="error_not_xmpp">未知错误</string>
+    <string name="error_not_connected">未连接</string>
+    <string name="error_not_loggedin">未登录</string>
+    <string name="error_no_response">服务器无响应</string>
+    <string name="group_is_not_ready">准备中请稍候</string>
+    
+</resources>

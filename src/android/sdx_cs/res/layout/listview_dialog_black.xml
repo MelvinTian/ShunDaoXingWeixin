@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popBackground"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="80dip"
+    android:layout_marginLeft="50dip"
+    android:layout_marginRight="50dip"
+    android:layout_marginBottom="80dip"
+    android:background="@drawable/toast_dialog_blackbg"
+    android:orientation="vertical" >
+	<!-- listViewDialog的布局文件 -->
+        <ListView
+            android:id="@+id/listview_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/popup_divide"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:dividerHeight="0.1dip"
+            android:fastScrollEnabled="true" >
+        </ListView>
+	
+</LinearLayout>

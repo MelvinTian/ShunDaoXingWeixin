@@ -1,0 +1,8 @@
+{
+    header:{
+        type:'GenerateResource',
+        ver:'0.0.1'
+    },
+    body:{
+    }
+}

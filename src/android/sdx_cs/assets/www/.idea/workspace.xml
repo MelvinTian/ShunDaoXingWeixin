@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c2fc5e56-d0ae-4487-9cab-9100fcdfbe81" name="Default" comment="" />
+    <ignored path="artTemplate-master.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="artTemplate-master" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="pdfPreview.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/pdfPreview.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="47" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="2075">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="148" column="58" selection-start="5181" selection-end="5181" vertical-scroll-proportion="-10.474576" vertical-offset="3082" max-vertical-offset="5100">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="552" column="64" selection-start="32466" selection-end="32466" vertical-scroll-proportion="0.68330735" vertical-offset="13362" max-vertical-offset="19350">
+              <folding>
+                <marker date="1416470854735" expanded="true" signature="33630:33755" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="33787:34678" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="33821:34667" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="34688:34838" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="34725:34827" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="34991:36054" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="35075:36025" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="35221:36010" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="35300:35965" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="35547:35914" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="36318:36586" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="36359:36575" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="36400:36413" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="36622:41957" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="36699:40175" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="36926:40140" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="37133:37488" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="37687:38862" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="37952:38385" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="38007:38355" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="38917:39304" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="39370:40121" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="40241:40586" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="40371:40549" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="40635:41946" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="40758:40916" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41043:41372" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41461:41473" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41474:41871" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41510:41737" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41618:41714" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41775:41852" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="41913:41925" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="42057:43028" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="42270:42633" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="42740:42863" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="42893:43015" placeholder="..." />
+                <marker date="1416470854735" expanded="true" signature="40592:40610" placeholder="/*...*/" />
+                <marker date="1416470854735" expanded="true" signature="40592:40610" placeholder="/*...*/" />
+                <marker date="1416470854735" expanded="true" signature="40665:40830" placeholder="{...}" />
+                <marker date="1416470854735" expanded="true" signature="40761:40797" placeholder="{...}" />
+                <marker date="1416470854735" expanded="true" signature="40885:41613" placeholder="{...}" />
+                <marker date="1416470854735" expanded="true" signature="41086:41569" placeholder="{...}" />
+                <marker date="1416470854735" expanded="true" signature="41134:41387" placeholder="{...}" />
+                <marker date="1416470854735" expanded="true" signature="41416:41525" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shade.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/shade.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="79" column="24" selection-start="3609" selection-end="3609" vertical-scroll-proportion="0.0" vertical-offset="1325" max-vertical-offset="2200">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="onlinescore.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/onlinescore.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="322" column="18" selection-start="6678" selection-end="6679" vertical-scroll-proportion="-9.0" vertical-offset="7825" max-vertical-offset="15150">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="score.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/score.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="18" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0" vertical-offset="4275" max-vertical-offset="8325">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="1" selection-start="52" selection-end="52" vertical-scroll-proportion="-2.2058823" vertical-offset="0" max-vertical-offset="225">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shade.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shade.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="4" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0" vertical-offset="1550" max-vertical-offset="2225">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://L:/vakata-jstree-3.0.6-0-g507aee1/vakata-jstree-507aee1/demo/basic/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="6" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="3775">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/demo/score.html" />
+        <option value="$PROJECT_DIR$/demo/index1.html" />
+        <option value="$PROJECT_DIR$/demo/css/onlinescore.css" />
+        <option value="$PROJECT_DIR$/shade.html" />
+        <option value="$PROJECT_DIR$/css/login.css" />
+        <option value="$PROJECT_DIR$/index1.html" />
+        <option value="$PROJECT_DIR$/login.html" />
+        <option value="$PROJECT_DIR$/css/shade.css" />
+        <option value="$PROJECT_DIR$/js/pdfPreview.js" />
+        <option value="$PROJECT_DIR$/score.html" />
+        <option value="L:/项目评审系统/test.html" />
+        <option value="L:/项目评审系统/test1.html" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/project.html" />
+        <option value="$PROJECT_DIR$/css/onlinescore.css" />
+        <option value="$PROJECT_DIR$/main.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webfront" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="L:/项目评审系统/test.html" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="L:\OnlineScore\demo" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c2fc5e56-d0ae-4487-9cab-9100fcdfbe81" name="Default" comment="" />
+      <created>1411701933009</created>
+      <updated>1411701933009</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16125" sideWeight="0.67027026" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/css/onlinescore.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="222" column="15" selection-start="4801" selection-end="4801" vertical-scroll-proportion="0.0" vertical-offset="5325" max-vertical-offset="10975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shade.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="4" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0" vertical-offset="1550" max-vertical-offset="2225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://L:/vakata-jstree-3.0.6-0-g507aee1/vakata-jstree-507aee1/demo/basic/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="3775">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://L:/vakata-jstree-3.0.6-0-g507aee1/vakata-jstree-507aee1/demo/basic/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="3775">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shade.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="4" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0" vertical-offset="1550" max-vertical-offset="2225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="35" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://L:/vakata-jstree-3.0.6-0-g507aee1/vakata-jstree-507aee1/demo/basic/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="3775">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://L:/项目评审系统/test1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="28" selection-start="554" selection-end="559" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="775">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/score.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="18" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0" vertical-offset="4275" max-vertical-offset="8325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://L:/项目评审系统/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="38" selection-start="1077" selection-end="1095" vertical-scroll-proportion="-4.529412" vertical-offset="596" max-vertical-offset="1275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/shade.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="24" selection-start="3609" selection-end="3609" vertical-scroll-proportion="0.0" vertical-offset="1325" max-vertical-offset="2200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/pdfPreview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="47" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="2075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="1" selection-start="52" selection-end="52" vertical-scroll-proportion="-2.2058823" vertical-offset="0" max-vertical-offset="225">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="58" selection-start="5181" selection-end="5181" vertical-scroll-proportion="-10.474576" vertical-offset="3082" max-vertical-offset="5100">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/onlinescore.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="322" column="18" selection-start="6678" selection-end="6679" vertical-scroll-proportion="-9.0" vertical-offset="7825" max-vertical-offset="15150">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="552" column="64" selection-start="32466" selection-end="32466" vertical-scroll-proportion="0.68330735" vertical-offset="13362" max-vertical-offset="19350">
+          <folding>
+            <marker date="1416470854735" expanded="true" signature="33630:33755" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="33787:34678" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="33821:34667" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="34688:34838" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="34725:34827" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="34991:36054" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="35075:36025" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="35221:36010" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="35300:35965" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="35547:35914" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="36318:36586" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="36359:36575" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="36400:36413" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="36622:41957" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="36699:40175" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="36926:40140" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="37133:37488" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="37687:38862" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="37952:38385" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="38007:38355" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="38917:39304" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="39370:40121" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="40241:40586" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="40371:40549" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="40635:41946" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="40758:40916" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41043:41372" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41461:41473" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41474:41871" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41510:41737" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41618:41714" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41775:41852" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="41913:41925" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="42057:43028" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="42270:42633" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="42740:42863" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="42893:43015" placeholder="..." />
+            <marker date="1416470854735" expanded="true" signature="40592:40610" placeholder="/*...*/" />
+            <marker date="1416470854735" expanded="true" signature="40592:40610" placeholder="/*...*/" />
+            <marker date="1416470854735" expanded="true" signature="40665:40830" placeholder="{...}" />
+            <marker date="1416470854735" expanded="true" signature="40761:40797" placeholder="{...}" />
+            <marker date="1416470854735" expanded="true" signature="40885:41613" placeholder="{...}" />
+            <marker date="1416470854735" expanded="true" signature="41086:41569" placeholder="{...}" />
+            <marker date="1416470854735" expanded="true" signature="41134:41387" placeholder="{...}" />
+            <marker date="1416470854735" expanded="true" signature="41416:41525" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
