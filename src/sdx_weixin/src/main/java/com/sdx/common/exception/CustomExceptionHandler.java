@@ -1,7 +1,7 @@
 package com.sdx.common.exception;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,29 +11,25 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-public class CustomExceptionHandler implements HandlerExceptionResolver {
-	private static final Log logger = LogFactory
-			.getLog(CustomExceptionHandler.class);
+public class CustomExceptionHandler implements HandlerExceptionResolver
+{
+	private static final Log logger = LogFactory.getLog(CustomExceptionHandler.class);
 
 	@Override
-	public ModelAndView resolveException(HttpServletRequest request,
-			HttpServletResponse response, Object object, Exception exception) {
-		logger.error("oms_business custom_error", exception);
-		try {
-			response.setStatus(500);
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter writer = response.getWriter();
-			if (exception instanceof NestedUmaException) {
-				writer.print(((NestedUmaException) exception).getMessage()
-						+ ",请您联系管理员!");
-			} else {
-				writer.print("出错了哦，请再试试或联系管理员");
-			}
-			response.flushBuffer();
-		} catch (IOException e) {
-			logger.error("io_error", e);
-			e.printStackTrace();
+	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object object, Exception exception)
+	{
+		logger.error("sdx_weixin custom_error", exception);
+		Map<String, String> errorInfo = new HashMap<String, String>();
+		String errorPage = "500_page";
+		if (exception instanceof JsonRequestException)
+		{
+			errorPage = "500_json";
+			errorInfo.put("message", ((JsonRequestException) exception).getMsg());
+			errorInfo.put("code", ((JsonRequestException) exception).getCode());
+		} else {
+			errorInfo.put("message", ((PageRequestException) exception).getMsg());
 		}
-		return null;
+		
+		return new ModelAndView("/error/" + errorPage, "error", errorInfo);
 	}
 }

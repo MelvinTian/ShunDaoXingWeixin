@@ -5,7 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/generator"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-        <property name="context-root" value="auth_center"/>
         <property name="java-output-path" value="/auth_center/bin"/>
+        <property name="context-root" value="/sdx_weixin"/>
     </wb-module>
 </project-modules>

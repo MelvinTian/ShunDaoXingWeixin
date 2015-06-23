@@ -97,7 +97,6 @@
         </property>  
     </bean>
 	<!-- end -->
-    <bean name="/navigation" class="com.sdx.common.web.NavigationController"></bean>
     
     <!-- i18n start -->
 	<bean id="messageSource"

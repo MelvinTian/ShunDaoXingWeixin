@@ -6,8 +6,8 @@
 	<context id="umapp" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.PaginationPlugin" />
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/umapp?useUnicode=true&amp;characterEncoding=UTF-8"
-			userId="root" password="root">
+			connectionURL="jdbc:mysql://localhost:3306/sdx_weixin?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="root" password="123456">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -25,43 +25,8 @@
 			targetPackage="com.sdx.common.mapper" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<!-- 
-		<table schema="umaap" tableName="dictionary">
-			<generatedKey column="dic_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="platform_info">
-			<generatedKey column="platform_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="raw_res_info">
-			<generatedKey column="resource_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="resource_info">
-			<generatedKey column="resource_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="service_info">
-			<generatedKey column="service_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="version_log">
-			<generatedKey column="log_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="request_log">
-			<generatedKey column="log_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umaap" tableName="backlog">
-			<generatedKey column="backlog_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		 -->
-		 <!-- <table schema="umapp" tableName="template_info">
-			<generatedKey column="template_id" sqlStatement="MYSQL" identity="true" />
-		</table> 
-		<table schema="umapp" tableName="comtype_info">
-			<generatedKey column="id" sqlStatement="MYSQL" identity="true" />
-		</table> -->
-		<table schema="umapp" tableName="raw_res_info">
-			<generatedKey column="resource_id" sqlStatement="MYSQL" identity="true" />
-		</table>
-		<table schema="umapp" tableName="resource_info">
-			<generatedKey column="resource_id" sqlStatement="MYSQL" identity="true" />
+		<table schema="sdx_weixin" tableName="user_bind">
+			<generatedKey column="bind_id" sqlStatement="MYSQL" identity="true" />
 		</table>
 	</context>
 </generatorConfiguration>
