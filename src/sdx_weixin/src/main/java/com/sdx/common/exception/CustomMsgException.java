@@ -13,6 +13,12 @@ public class CustomMsgException extends Exception
 		super(msg);
 		this.msg = msg;
 	}
+	
+	public CustomMsgException(String msg, Throwable e)
+	{
+		super(e);
+		this.msg = msg;
+	}
 
 	public String getMsg()
 	{

@@ -29,7 +29,7 @@ public class HttpsClient
 
 	public static String doGet(String url) throws CustomMsgException
 	{
-		return doGet(url, DEFAULT_CHARSET, 10, 10);
+		return doGet(url, DEFAULT_CHARSET, 10*1000, 10*1000);
 	}
 	
 	public static String doGet(String url, String charset, int connectTimeout, int readTimeout) throws CustomMsgException

@@ -26,6 +26,7 @@ public class NavigateController
 	private static final String NAVIGATE_ITEM_PREFIX = "navigate.";
 	
 	private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?grant_type=authorization_code";
+//	private static final String ACCESS_TOKEN_URL = "https://app.richfit.com/html/test.json?grant_type=authorization_code";
 	
 	@RequestMapping(value="/{item}")
 	public ModelAndView index(@PathVariable String item, HttpServletRequest request, HttpServletResponse response) throws PageRequestException
@@ -41,7 +42,7 @@ public class NavigateController
 			throw new PageRequestException("跳转地址不合法");
 		}
 		StringBuffer accessTokenUri = new StringBuffer(ACCESS_TOKEN_URL);
-		accessTokenUri.append("&appid=").append(WeixinConstants.weixinAppid()).append("&secret").append(WeixinConstants.weixinSecret()).append("&code=").append(code);
+		accessTokenUri.append("&appid=").append(WeixinConstants.weixinAppid()).append("&secret=").append(WeixinConstants.weixinSecret()).append("&code=").append(code);
 		JSONObject resJson;
 		try
 		{
@@ -51,7 +52,7 @@ public class NavigateController
 		{
 			throw new PageRequestException(e.getMsg());
 		}
-		String error = resJson.optString("error");
+		String error = resJson.optString("errmsg");
 		if (!StringUtils.isEmpty(error))
 		{
 			throw new PageRequestException(resJson.optString("errmsg"));

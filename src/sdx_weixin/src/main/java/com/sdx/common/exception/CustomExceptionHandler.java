@@ -26,8 +26,12 @@ public class CustomExceptionHandler implements HandlerExceptionResolver
 			errorPage = "500_json";
 			errorInfo.put("message", ((JsonRequestException) exception).getMsg());
 			errorInfo.put("code", ((JsonRequestException) exception).getCode());
+		} else if (exception instanceof CustomMsgException)
+		{
+			errorInfo.put("message", ((CustomMsgException) exception).getMsg());
 		} else {
-			errorInfo.put("message", ((PageRequestException) exception).getMsg());
+			errorInfo.put("message", exception.getMessage());
+			logger.error(exception.getMessage(), exception);
 		}
 		
 		return new ModelAndView("/error/" + errorPage, "error", errorInfo);
