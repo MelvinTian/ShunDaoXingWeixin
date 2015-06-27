@@ -15,7 +15,7 @@ import com.sdx.common.exception.CustomMsgException;
 import com.sdx.common.exception.PageRequestException;
 import com.sdx.utils.PropertiesCacheController;
 import com.sdx.utils.WeixinConstants;
-import com.sdx.utils.web.HttpsClient;
+import com.sdx.utils.web.SdxHttpClient;
 
 @Controller
 @RequestMapping(value = "/navigate")
@@ -46,7 +46,7 @@ public class NavigateController
 		JSONObject resJson;
 		try
 		{
-			resJson = JSONObject.fromObject(HttpsClient.doGet(accessTokenUri.toString()));
+			resJson = JSONObject.fromObject(SdxHttpClient.doHttpsGet(accessTokenUri.toString()));
 		}
 		catch (CustomMsgException e)
 		{

@@ -1,6 +1,7 @@
 package com.sdx.utils.web;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,34 +13,70 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Map;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.entity.BasicHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.HTTP;
 import org.apache.log4j.Logger;
 
 import com.sdx.common.exception.CustomMsgException;
 
-public class HttpsClient
+public class SdxHttpClient
 {
-	private static final Logger log = Logger.getLogger(HttpsClient.class);
+	private static final Logger log = Logger.getLogger(SdxHttpClient.class);
+
 	private static final String METHOD_POST = "POST";
 	private static final String METHOD_GET = "GET";
 	private static final String DEFAULT_CHARSET = "utf-8";
+	private static final String CONTENT_TYPE = "application/json;charset=" + DEFAULT_CHARSET;
+	private static final String CONSTANTS_PREFIX = "constants.http.";
 
-	public static String doGet(String url) throws CustomMsgException
+	private static int CONNECTION_TIMEOUT = 6000;
+	private static int SO_TIMEOUT = 10000;
+
+	public static void configHttpClient(Map<String, String> params)
 	{
-		return doGet(url, DEFAULT_CHARSET, 10*1000, 10*1000);
+		String temp = params.get(CONSTANTS_PREFIX + "connectionTimeout");
+		CONNECTION_TIMEOUT = Integer.parseInt(temp);
+		temp = params.get(CONSTANTS_PREFIX + "soTimeout");
+		SO_TIMEOUT = Integer.parseInt(temp);
 	}
-	
-	public static String doGet(String url, String charset, int connectTimeout, int readTimeout) throws CustomMsgException
+
+	public static String doHttpsGet(String url) throws CustomMsgException
 	{
-		String ctype = "application/json;charset=" + charset;
-
-		return doConnect(url, ctype, new byte[]{}, connectTimeout, readTimeout, METHOD_GET);
+		return doHttpsGet(url, DEFAULT_CHARSET, CONNECTION_TIMEOUT, SO_TIMEOUT);
 	}
 
-	public static String doPost(String url, String params, String charset, int connectTimeout, int readTimeout) throws CustomMsgException
+	public static String doHttpsGet(String url, String charset, int connectTimeout, int readTimeout) throws CustomMsgException
+	{
+		return doHttpsConnect(url, CONTENT_TYPE, new byte[]
+		{}, connectTimeout, readTimeout, METHOD_GET);
+	}
+
+	public static String doHttpsPost(String url, String params, String charset, int connectTimeout, int readTimeout) throws CustomMsgException
 	{
 		String ctype = "application/json;charset=" + charset;
 		byte[] content =
@@ -57,10 +94,11 @@ public class HttpsClient
 			}
 		}
 
-		return doConnect(url, ctype, content, connectTimeout, readTimeout, METHOD_POST);
+		return doHttpsConnect(url, ctype, content, connectTimeout, readTimeout, METHOD_POST);
 	}
 
-	public static String doConnect(String url, String ctype, byte[] content, int connectTimeout, int readTimeout, String httpMethod) throws CustomMsgException
+	public static String doHttpsConnect(String url, String ctype, byte[] content, int connectTimeout, int readTimeout, String httpMethod)
+					throws CustomMsgException
 	{
 		HttpsURLConnection conn = null;
 		OutputStream out = null;
@@ -232,5 +270,66 @@ public class HttpsClient
 		}
 
 		return charset;
+	}
+
+	public static HttpResponse sendRequest(String url, String requestBody) throws CustomMsgException
+	{
+		BasicHttpEntity requestEntity = new BasicHttpEntity();
+		requestEntity.setContentType("application/json");
+		requestEntity.setContentEncoding(DEFAULT_CHARSET);
+		try
+		{
+			requestEntity.setContent(new ByteArrayInputStream(requestBody.getBytes(DEFAULT_CHARSET)));
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+			return null;
+		}
+		HttpPost post = new HttpPost(url);
+		post.setEntity(requestEntity);
+		HttpParams httpParameters = new BasicHttpParams();
+		// 设置连接超时
+		HttpConnectionParams.setConnectionTimeout(httpParameters, CONNECTION_TIMEOUT);
+		// 设置socket超时
+		HttpConnectionParams.setSoTimeout(httpParameters, SO_TIMEOUT);
+		HttpClient client = initHttpClient(httpParameters);
+
+		HttpResponse response = null;
+		try
+		{
+			response = client.execute(post);
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+		}
+		return response;
+	}
+
+	/**
+	 * 初始化HttpClient对象
+	 * @param params
+	 * @return
+	 */
+	public static synchronized HttpClient initHttpClient(HttpParams params)
+	{
+		try
+		{
+			HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+			HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+			// 设置http和https支持
+			SchemeRegistry registry = new SchemeRegistry();
+			registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+
+			ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
+
+			return new DefaultHttpClient(ccm, params);
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+			return new DefaultHttpClient(params);
+		}
 	}
 }

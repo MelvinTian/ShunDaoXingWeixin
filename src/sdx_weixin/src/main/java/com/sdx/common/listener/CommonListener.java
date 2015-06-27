@@ -19,7 +19,6 @@ public class CommonListener implements ServletContextListener
 	public void contextInitialized(ServletContextEvent arg0)
 	{
 		PropertiesCacheController.initBasicData();
-		// PropertiesCacheController.initJsonData(arg0.getServletContext().getRealPath("/"));
 	}
 
 }

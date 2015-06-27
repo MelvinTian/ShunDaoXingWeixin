@@ -35,7 +35,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import com.sdx.utils.web.HttpsClient;
+import com.sdx.utils.web.SdxHttpClient;
 
 public class TestHttpClient
 {
@@ -83,9 +83,47 @@ public class TestHttpClient
 		System.out.println(EntityUtils.toString(requestEntity));
 		return reponse;
 	}
+	/**
+	 * 初始化HttpClient对象
+	 * @param params
+	 * @return
+	 */
+	public static synchronized HttpClient initHttpClient(HttpParams params)
+	{
+		HttpClient client = null;
+		if (client == null)
+		{
+			try
+			{
+				KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+				trustStore.load(null, null);
+
+				SSLSocketFactory sf = new SSLSocketFactory(trustStore);
+				// 允许所有主机的验证
+				sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+				HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+				HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+				// 设置http和https支持
+				SchemeRegistry registry = new SchemeRegistry();
+				registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+				registry.register(new Scheme("https", sf, 443));
+
+				ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
+
+				return new DefaultHttpClient(ccm, params);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				return new DefaultHttpClient(params);
+			}
+		}
+		return client;
+	}
 	public static void test(String url) throws Exception
 	{
-		System.out.println(HttpsClient.doGet(url));
+		System.out.println(SdxHttpClient.doHttpsGet(url));
 	}
 
 	public static void test1(String url) throws Exception
@@ -170,42 +208,4 @@ public class TestHttpClient
 		}
 	}
 	
-	/**
-	 * 初始化HttpClient对象
-	 * @param params
-	 * @return
-	 */
-	public static synchronized HttpClient initHttpClient(HttpParams params)
-	{
-		HttpClient client = null;
-		if (client == null)
-		{
-			try
-			{
-				KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-				trustStore.load(null, null);
-
-				SSLSocketFactory sf = new SSLSocketFactory(trustStore);
-				// 允许所有主机的验证
-				sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-				HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-				HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
-				// 设置http和https支持
-				SchemeRegistry registry = new SchemeRegistry();
-				registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-				registry.register(new Scheme("https", sf, 443));
-
-				ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
-
-				return new DefaultHttpClient(ccm, params);
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-				return new DefaultHttpClient(params);
-			}
-		}
-		return client;
-	}
 }
