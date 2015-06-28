@@ -31,5 +31,11 @@
 		<table schema="sdx_weixin" tableName="midd_log">
 			<generatedKey column="log_id" sqlStatement="MYSQL" identity="true" />
 		</table>
+		<table schema="sdx_weixin" tableName="client_log">
+			<generatedKey column="log_id" sqlStatement="MYSQL" identity="true" />
+		</table>
+		<table schema="sdx_weixin" tableName="user_address">
+			<generatedKey column="addr_id" sqlStatement="MYSQL" identity="true" />
+		</table>
 	</context>
 </generatorConfiguration>

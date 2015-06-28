@@ -26,6 +26,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
   <body>
     <h1>你好，世界！</h1>
-    <input type="hidden" value="${openId}" />
+	  <div class="col-lg-6">
+	    <div class="input-group">
+	      <input id="userMobile" type="text" class="form-control" placeholder="用户手机号" />
+	      <span class="input-group-btn">
+	        <button class="btn btn-default" type="button" id="btnBindUser">绑定</button>
+	      </span>
+	    </div><!-- /input-group -->
+	  </div><!-- /.col-lg-6 -->
+	</div><!-- /.row -->
+	<script type="text/javascript">
+	$(function (){
+		$("#btnBindUser").click(function(){
+			var userMobile = $("#userMobile").val();
+			$.get("<%=basePath %>user/bind/${openId}?userMobile=" + userMobile, function(result){
+			    alert(result.userId);
+			  });
+		});
+	});
+	</script>
   </body>
 </html>
