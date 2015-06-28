@@ -13,7 +13,6 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -43,6 +42,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.log4j.Logger;
 
 import com.sdx.common.exception.CustomMsgException;
+import com.sdx.common.exception.ErrorCodeConstants;
+import com.sdx.common.service.SdxConstants;
 
 public class SdxHttpClient
 {
@@ -52,22 +53,10 @@ public class SdxHttpClient
 	private static final String METHOD_GET = "GET";
 	private static final String DEFAULT_CHARSET = "utf-8";
 	private static final String CONTENT_TYPE = "application/json;charset=" + DEFAULT_CHARSET;
-	private static final String CONSTANTS_PREFIX = "constants.http.";
-
-	private static int CONNECTION_TIMEOUT = 6000;
-	private static int SO_TIMEOUT = 10000;
-
-	public static void configHttpClient(Map<String, String> params)
-	{
-		String temp = params.get(CONSTANTS_PREFIX + "connectionTimeout");
-		CONNECTION_TIMEOUT = Integer.parseInt(temp);
-		temp = params.get(CONSTANTS_PREFIX + "soTimeout");
-		SO_TIMEOUT = Integer.parseInt(temp);
-	}
 
 	public static String doHttpsGet(String url) throws CustomMsgException
 	{
-		return doHttpsGet(url, DEFAULT_CHARSET, CONNECTION_TIMEOUT, SO_TIMEOUT);
+		return doHttpsGet(url, DEFAULT_CHARSET, SdxConstants.CONNECTION_TIMEOUT, SdxConstants.SO_TIMEOUT);
 	}
 
 	public static String doHttpsGet(String url, String charset, int connectTimeout, int readTimeout) throws CustomMsgException
@@ -90,7 +79,7 @@ public class SdxHttpClient
 			catch (UnsupportedEncodingException e)
 			{
 				log.error(e.getMessage(), e);
-				throw new CustomMsgException("接口返回字符编码不正确");
+				throw new CustomMsgException("接口返回字符编码不正确", ErrorCodeConstants.DATA_FORMAT_ERROR);
 			}
 		}
 
@@ -127,7 +116,7 @@ public class SdxHttpClient
 			catch (Exception e)
 			{
 				log.error("GET_CONNECTOIN_ERROR, URL = " + url, e);
-				throw new CustomMsgException("服务器连接错误");
+				throw new CustomMsgException("服务器连接错误", ErrorCodeConstants.CONNECTION_ERROR);
 			}
 			try
 			{
@@ -138,7 +127,7 @@ public class SdxHttpClient
 			catch (IOException e)
 			{
 				log.error("REQUEST_RESPONSE_ERROR, URL = " + url, e);
-				throw new CustomMsgException("服务器连接错误");
+				throw new CustomMsgException("服务器连接错误", ErrorCodeConstants.CONNECTION_ERROR);
 			}
 
 		}
@@ -284,15 +273,15 @@ public class SdxHttpClient
 		catch (Exception e)
 		{
 			log.error(e.getMessage(), e);
-			return null;
+			throw new CustomMsgException("网络连接错误", ErrorCodeConstants.CONNECTION_ERROR, e);
 		}
 		HttpPost post = new HttpPost(url);
 		post.setEntity(requestEntity);
 		HttpParams httpParameters = new BasicHttpParams();
 		// 设置连接超时
-		HttpConnectionParams.setConnectionTimeout(httpParameters, CONNECTION_TIMEOUT);
+		HttpConnectionParams.setConnectionTimeout(httpParameters, SdxConstants.CONNECTION_TIMEOUT);
 		// 设置socket超时
-		HttpConnectionParams.setSoTimeout(httpParameters, SO_TIMEOUT);
+		HttpConnectionParams.setSoTimeout(httpParameters, SdxConstants.SO_TIMEOUT);
 		HttpClient client = initHttpClient(httpParameters);
 
 		HttpResponse response = null;
@@ -303,6 +292,7 @@ public class SdxHttpClient
 		catch (Exception e)
 		{
 			log.error(e.getMessage(), e);
+			throw new CustomMsgException("网络连接错误", ErrorCodeConstants.CONNECTION_ERROR, e);
 		}
 		return response;
 	}

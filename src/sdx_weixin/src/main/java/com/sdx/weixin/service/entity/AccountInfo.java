@@ -4,125 +4,81 @@ import java.util.List;
 
 public class AccountInfo
 {
-	private String CUSTOMERID;// 客户ID号
-	private String CUSTOMERNAME;// 客户姓名
-	private String SEX;// 性别
-	private String EMAIL;// 客户Email
-	private String MOBILENO;// 手机号码
-	private String LICENSENO;// 驾驶证号码
-	private String CURRENTPOINT;// 当前积分
-	private int CHECKEDMOBILE;// 手机号码是否通过验证
-	private int CHECKEDEMAIL;// Email是否通过验证
-	private List<CarInfo> CARINFOLIST;// 车辆信息列表
-	private AccountInfo ACCOUNTINFO;// 会员信息
+	private String ACCOUNTID;// 会员ID
+	private String ACCOUNTNO;// 会员号
+	private Float BALANCE;// 会员当前余额
+	private String ACCOUNTLEVEL;// 会员级别
+	private String CURRENTPKGINFO;// 当前套餐名称
+	private String CURRENTPKGDATE;// 当前套餐购买日期
+	private List<CustServiceInfo> SERVICELIST;// 客户套餐服务项目明细
 
-	public String getCUSTOMERID()
+	public String getACCOUNTID()
 	{
-		return CUSTOMERID;
+		return ACCOUNTID;
 	}
 
-	public void setCUSTOMERID(String cUSTOMERID)
+	public void setACCOUNTID(String aCCOUNTID)
 	{
-		CUSTOMERID = cUSTOMERID;
+		ACCOUNTID = aCCOUNTID;
 	}
 
-	public String getCUSTOMERNAME()
+	public String getACCOUNTNO()
 	{
-		return CUSTOMERNAME;
+		return ACCOUNTNO;
 	}
 
-	public void setCUSTOMERNAME(String cUSTOMERNAME)
+	public void setACCOUNTNO(String aCCOUNTNO)
 	{
-		CUSTOMERNAME = cUSTOMERNAME;
+		ACCOUNTNO = aCCOUNTNO;
 	}
 
-	public String getSEX()
+	public Float getBALANCE()
 	{
-		return SEX;
+		return BALANCE;
 	}
 
-	public void setSEX(String sEX)
+	public void setBALANCE(Float bALANCE)
 	{
-		SEX = sEX;
+		BALANCE = bALANCE;
 	}
 
-	public String getEMAIL()
+	public String getACCOUNTLEVEL()
 	{
-		return EMAIL;
+		return ACCOUNTLEVEL;
 	}
 
-	public void setEMAIL(String eMAIL)
+	public void setACCOUNTLEVEL(String aCCOUNTLEVEL)
 	{
-		EMAIL = eMAIL;
+		ACCOUNTLEVEL = aCCOUNTLEVEL;
 	}
 
-	public String getMOBILENO()
+	public String getCURRENTPKGINFO()
 	{
-		return MOBILENO;
+		return CURRENTPKGINFO;
 	}
 
-	public void setMOBILENO(String mOBILENO)
+	public void setCURRENTPKGINFO(String cURRENTPKGINFO)
 	{
-		MOBILENO = mOBILENO;
+		CURRENTPKGINFO = cURRENTPKGINFO;
 	}
 
-	public String getLICENSENO()
+	public String getCURRENTPKGDATE()
 	{
-		return LICENSENO;
+		return CURRENTPKGDATE;
 	}
 
-	public void setLICENSENO(String lICENSENO)
+	public void setCURRENTPKGDATE(String cURRENTPKGDATE)
 	{
-		LICENSENO = lICENSENO;
+		CURRENTPKGDATE = cURRENTPKGDATE;
 	}
 
-	public String getCURRENTPOINT()
+	public List<CustServiceInfo> getSERVICELIST()
 	{
-		return CURRENTPOINT;
+		return SERVICELIST;
 	}
 
-	public void setCURRENTPOINT(String cURRENTPOINT)
+	public void setSERVICELIST(List<CustServiceInfo> sERVICELIST)
 	{
-		CURRENTPOINT = cURRENTPOINT;
-	}
-
-	public int getCHECKEDMOBILE()
-	{
-		return CHECKEDMOBILE;
-	}
-
-	public void setCHECKEDMOBILE(int cHECKEDMOBILE)
-	{
-		CHECKEDMOBILE = cHECKEDMOBILE;
-	}
-
-	public int getCHECKEDEMAIL()
-	{
-		return CHECKEDEMAIL;
-	}
-
-	public void setCHECKEDEMAIL(int cHECKEDEMAIL)
-	{
-		CHECKEDEMAIL = cHECKEDEMAIL;
-	}
-
-	public List<CarInfo> getCARINFOLIST()
-	{
-		return CARINFOLIST;
-	}
-
-	public void setCARINFOLIST(List<CarInfo> cARINFOLIST)
-	{
-		CARINFOLIST = cARINFOLIST;
-	}
-
-	public AccountInfo getACCOUNTINFO()
-	{
-		return ACCOUNTINFO;
-	}
-
-	public void setACCOUNTINFO(AccountInfo aCCOUNTINFO)
-	{
-		ACCOUNTINFO = aCCOUNTINFO;
+		SERVICELIST = sERVICELIST;
 	}
 }

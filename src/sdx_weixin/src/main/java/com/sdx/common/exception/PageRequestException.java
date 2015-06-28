@@ -9,6 +9,6 @@ public class PageRequestException extends CustomMsgException
 
 	public PageRequestException(String msg)
 	{
-		super(msg);
+		super(msg, ErrorCodeConstants.PAGE_ERROR);
 	}
 }

@@ -6,13 +6,17 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sdx.bms.client.BMSEngine;
 import com.sdx.common.exception.CustomMsgException;
 import com.sdx.common.exception.PageRequestException;
+import com.sdx.common.service.SdxConstants;
+import com.sdx.utils.JSONUtil;
 import com.sdx.utils.PropertiesCacheController;
 import com.sdx.utils.WeixinConstants;
 import com.sdx.utils.web.SdxHttpClient;
@@ -21,6 +25,9 @@ import com.sdx.utils.web.SdxHttpClient;
 @RequestMapping(value = "/navigate")
 public class NavigateController
 {
+	@Autowired
+	private BMSEngine engine;
+
 	// 跳转页面前缀
 	private static final String PREFIX = "redirect:";
 	private static final String NAVIGATE_ITEM_PREFIX = "navigate.";
@@ -46,7 +53,12 @@ public class NavigateController
 		JSONObject resJson;
 		try
 		{
-			resJson = JSONObject.fromObject(SdxHttpClient.doHttpsGet(accessTokenUri.toString()));
+			if (SdxConstants.useTestClient)
+			{
+				resJson = JSONUtil.readTestJson("weixin");
+			} else {
+				resJson = JSONObject.fromObject(SdxHttpClient.doHttpsGet(accessTokenUri.toString()));
+			}
 		}
 		catch (CustomMsgException e)
 		{
@@ -60,6 +72,6 @@ public class NavigateController
 		String openId = resJson.getString("openid");
 		request.getSession().setAttribute("openId", openId);
 
-		return new ModelAndView(PREFIX + item);
+		return new ModelAndView(PREFIX + forwardUrl);
 	}
 }

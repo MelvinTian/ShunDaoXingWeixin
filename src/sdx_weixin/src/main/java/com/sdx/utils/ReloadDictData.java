@@ -6,8 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sdx.bms.client.BMSClient;
-import com.sdx.utils.web.SdxHttpClient;
+import com.sdx.common.service.SdxConstants;
 
 /**
  * TODO What the class does
@@ -24,7 +23,6 @@ public class ReloadDictData
 		PropertiesCacheController.initBasicData();
 		Map<String, String> basicData = PropertiesCacheController.getBasicData();
 		// 以下是需要重新加载的属性部分
-		BMSClient.configClient(basicData);
-		SdxHttpClient.configHttpClient(basicData);
+		SdxConstants.loadConfig(basicData);
 	}
 }

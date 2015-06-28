@@ -1,6 +1,8 @@
 
 package com.sdx.utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
@@ -17,6 +19,12 @@ import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+
+import com.sdx.common.exception.CustomMsgException;
+import com.sdx.common.exception.ErrorCodeConstants;
+import com.sdx.common.service.SdxConstants;
 import com.sdx.utils.page.Page;
 import com.sdx.utils.page.PageInfo;
 
@@ -25,7 +33,11 @@ import com.sdx.utils.page.PageInfo;
  */
 public abstract class JSONUtil
 {
+	private static final Logger log = Logger.getLogger(JSONUtil.class);
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final String TEST_DATA_PATH = "/testJson/";
+	private static final String DEFAULT_CHARSET = "UTF-8";
 
     public static String getJSONObjectKey(String jsonStr)
     {
@@ -222,5 +234,28 @@ public abstract class JSONUtil
 			jsonArray.add(o);
 		}
 		return jsonArray.toString();
+	}
+	
+	public static JSONObject createResultJSON()
+	{
+		JSONObject result = new JSONObject();
+		return result;
+	}
+	
+	public static JSONObject readTestJson(String fileName) throws CustomMsgException
+	{
+		String fileContent = null;
+		File file = new File(SdxConstants.WEB_CLASS_PATH + TEST_DATA_PATH + fileName + ".json");
+		try
+		{
+			fileContent = FileUtils.readFileToString(file, DEFAULT_CHARSET);
+		}
+		catch (IOException e)
+		{
+			log.error(e.getMessage(), e);
+			log.error("file name error : " + file.getAbsolutePath());
+			throw new CustomMsgException("读取测试协议结果错误", ErrorCodeConstants.CONNECTION_ERROR);
+		}
+		return JSONObject.fromObject(fileContent);
 	}
 }
